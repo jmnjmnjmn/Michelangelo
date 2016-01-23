@@ -9,11 +9,6 @@ module UsersHelper
 	      "searchedUser-table-0-#{User.maximum(:created_at)}-#{lastUpdate}"
 	    end  
 
-		# if searchedUser
-		# 	"searchedUser-table-#{searchedUser}-#{lastUpdate}"
-	 #    else
-	 #    	"searchedUser-table-0-#{User.maximum(:created_at)}-#{lastUpdate}"
-	 #    end
 	end
 
 	def cache_key_for_searchedUser_row(searchedUser)

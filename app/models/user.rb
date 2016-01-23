@@ -36,9 +36,7 @@ class User < ActiveRecord::Base
 
     User.where("id IN (#{friender_friends_ids}) OR
           id IN (#{friended_friends_ids})", user_id: self.id)
-    
-    # User.where("id IN (#{friended_friends_ids})",user_id: self.id)
-       
+      
   end
 
   # Only display the sharing contents of the user and his friends

@@ -6,10 +6,7 @@ class Music < ActiveRecord::Base
   has_many   :comments, :foreign_key => :post_id, dependent: :destroy
   has_many   :likes, :foreign_key => :post_id, dependent: :destroy
 
-  # has_many   :unlikes, :foreign_key => :post_id, dependent: :destroy
-
   validates :link, presence: true
-  # validates :comment, presence: true
   validates :uid, presence: true
 
   def user
@@ -31,11 +28,7 @@ class Music < ActiveRecord::Base
   	Like.where(post_id: self.id, liketype: 0).count
   end
 
-  # def unlikecount
-  #   Unlike.where(post_id: self.id).count
-  # end
-
-
+  
 end
 
 

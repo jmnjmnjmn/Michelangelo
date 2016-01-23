@@ -3,26 +3,13 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:edit, :show, :friends, :update, :destroy, :newfriend, :mytimeline, :audiotimeline]
   before_action :set_current_user, only: [:index, :show, :friends, :newfriend, :mytimeline, :audiotimeline]
 
-  # GET /users
-  # GET /users.json
-  # def index
-  #   @users = User.all
-  # end
-  # def index
-  #   @searchedUsers = User.search(params[:search])
-  # end
-
   def index
 
     if params[:search]
       @searchedUsers = User.search(params[:search]).order("created_at DESC").paginate(:page => params[:page], per_page: 8)
-      # @lastUpdate = User.search(params[:search]).maximum(:updated_at)
     else
       @searchedUsers = User.order("created_at DESC").paginate(:page => params[:page], per_page: 8)
-      # @lastUpdate = User.maximum(:updated_at)
     end    
-    
-    # @current_user = User.find(session[:user_id])
 
   end
 
@@ -30,22 +17,15 @@ class UsersController < ApplicationController
   # GET /users/1.json
   def show
     @mymusics = Music.where(:uid => params[:id]).order('created_at DESC')
-    # @current_user = User.find(session[:user_id])
-
     @date = @user.created_at.strftime('%B %d, %Y')
   end
 
   def friends
-    # @current_user = User.find(session[:user_id])
     @friends = @user.friends.paginate(:page => params[:page], per_page: 10).order('created_at DESC')
-    # if params[:id] != session[:user_id]
-    #   redirect_to homepage_path(session[:user_id])
-    # end
   end
 
 
   def mytimeline
-    # @current_user = User.find(session[:user_id])
     @mymusics = Music.where(:uid => params[:id]).paginate(:page => params[:page], per_page: 8).order('created_at DESC')
 
     @commenttype = 0
@@ -70,23 +50,14 @@ class UsersController < ApplicationController
 
 
   def newfriend
-    # @user = User.find(params[:id])
-    # @current_user = User.find(session[:user_id])
-    @friends = @user.friends
-    
+    @friends = @user.friends   
   end
 
 
   def notification
-    # @user = User.find(params[:id])
-    # @current_user = User.find(session[:user_id])
     @mynotification = Unreadcomment.where(:user_id => params[:id]).order('created_at DESC')
   end
   
-
-  # def requests_from
-  #   @requests_from = User.find(params[:id]).requests_from
-  # end
 
   # GET /users/new
   def new
@@ -145,12 +116,7 @@ class UsersController < ApplicationController
     end
   end
 
-  # def index
-  #   @users=User.order(:name)
-  # end
-
   def contact
-
   end
 
   private

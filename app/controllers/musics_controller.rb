@@ -8,15 +8,9 @@ class MusicsController < ApplicationController
   def index
     fresh_when @musics
     @current_user = User.find(session[:user_id])
-    # @musics = current_user.discover_musics.paginate(:page => params[:page], per_page: 5)
     @musics = @current_user.discover_musics.includes(:comments, :likes).paginate(:page => params[:page], per_page: 8)
     @commenttype = 0
-    @liketype = 0
-    # respond_to do |format|
-    #   format.html
-    #   format.js
-    # end
-  
+    @liketype = 0 
   end
 
   def allcomments
@@ -39,11 +33,6 @@ class MusicsController < ApplicationController
   def edit
   end
 
-  # def view_comm
-  #   Unreadcomment.delete(params[:id])
-  #   redirect_to mytimeline_path(session[:user_id])
-  # end
-
   # POST /musics
   # POST /musics.json
   def create
@@ -65,7 +54,6 @@ class MusicsController < ApplicationController
     respond_to do |format|
       if @music.save
         format.html { redirect_to @music }
-        # format.html { redirect_to @musics_url }
         format.json { render action: 'show', status: :created, location: @music }
       else
         format.html { render action: 'new' }
@@ -86,18 +74,6 @@ class MusicsController < ApplicationController
       redirect_to @music
     end
   end
-
-
-
-  #GET
-#   def comments
-#     @comments = self.comments.paginate(page => params[:page], per_page: 5)
-#     respond_to do |format|
-#       format.html # index.html.erb
-#       format.json { render json: @comments }
-#       format.js
-#   end
-# end
 
 
   # PATCH/PUT /musics/1
