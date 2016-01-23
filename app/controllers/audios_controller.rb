@@ -11,7 +11,6 @@ class AudiosController < ApplicationController
     @liketype = 1
 
     current_user = User.find(session[:user_id])
-    # @audios = current_user.discover_audios.paginate(:page => params[:page], per_page: 5)
     @audios = current_user.discover_audios.includes(:comments, :likes).paginate(:page => params[:page], per_page: 8)
 
     respond_to do |format|

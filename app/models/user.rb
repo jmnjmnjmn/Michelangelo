@@ -35,10 +35,7 @@ class User < ActiveRecord::Base
                             WHERE friender_id = :user_id AND accepted = 1"
 
     User.where("id IN (#{friender_friends_ids}) OR
-          id IN (#{friended_friends_ids})", user_id: self.id)
-    
-    # User.where("id IN (#{friended_friends_ids})",user_id: self.id)
-       
+          id IN (#{friended_friends_ids})", user_id: self.id) 
   end
 
   # Only display the sharing contents of the user and his friends
@@ -56,8 +53,6 @@ class User < ActiveRecord::Base
   end  
 
   def requests_from
-    # frienders_ids = "SELECT friender_id FROM friendships 
-    #                  WHERE friended_id = :user_id AND accepted = false"
     frienders_ids = "SELECT friender_id FROM friendships 
                      WHERE friended_id = :user_id AND accepted = 0"
 
@@ -100,12 +95,6 @@ class User < ActiveRecord::Base
   end
 
 def self.search(user_name)
-    # if user_name
-    #     user_name.downcase!
-    #     User.where('LOWER(name) LIKE ?', "%#{user_name}%")
-    # else
-    #     all
-    # end
     User.where("name like ?", "%#{user_name}%").order("created_at DESC")
 end
 

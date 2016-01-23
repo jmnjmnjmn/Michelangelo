@@ -36,7 +36,6 @@ class UnreadcommentsController < ApplicationController
 
     Unreadcomment.delete(params[:id])
 
-    # redirect_to mytimeline_path(session[:user_id])
   end
 
 

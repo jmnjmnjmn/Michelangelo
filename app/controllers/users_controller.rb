@@ -13,16 +13,7 @@ class UsersController < ApplicationController
   # end
 
   def index
-    # @searchedUsers = User.order("created_at DESC")
-    
-    # if params[:search]
-    #   @searchedUsers = User.search(params[:search]).order("created_at DESC")
-    # else
-    #   @searchedUsers = User.order("created_at DESC")
-    # end
-
     @current_user = User.find(session[:user_id])
-    # @friends = User.find(session[:user_id]).friends
   end
 
   # GET /users/1
@@ -37,9 +28,6 @@ class UsersController < ApplicationController
   def friends
     @current_user = User.find(session[:user_id])
     @friends = User.find(params[:id]).friends.paginate(:page => params[:page], per_page: 10).order('created_at DESC')
-    # if params[:id] != session[:user_id]
-    #   redirect_to homepage_path(session[:user_id])
-    # end
   end
 
 
@@ -77,16 +65,10 @@ class UsersController < ApplicationController
 
 
   def notification
-    # @user = User.find(params[:id])
-    # @current_user = User.find(session[:user_id])
     @commentNotification = Unreadcomment.where(:user_id => params[:id]).order('created_at DESC')
     @likeNotification = Unreadlike.where(:user_id => params[:id]).order('created_at DESC')
   end
 
-
-  # def requests_from
-  #   @requests_from = User.find(params[:id]).requests_from
-  # end
 
   # GET /users/new
   def new

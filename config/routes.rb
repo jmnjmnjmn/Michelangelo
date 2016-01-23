@@ -8,15 +8,10 @@
 #---
 Musicloud::Application.routes.draw do
 
-  # resources :unreadlikes
-
-  # get "tag/show"
-  # get "tag/cloud",  as: :tag_cloud
 
   get 'tag/cloud',        to: 'tag#cloud',         as: :trends  
   get 'tag/search/:id',        to: 'tag#search',         as: :showtag  
 
-  # resources :unreadcomments
 
   resources :audios
   
@@ -35,15 +30,9 @@ resources :friendships do
 end
 
 resources :musics
-# resources :musics do 
-#   member do
-#         put "like", to: "musics#like"
-#         put "dislike", to: "musics#dislike"
-#   end
-# end
 
   get "sessions/new"
-  # get 'admin' => 'admin#index'
+
   controller :sessions do
     get  'login' => :new
     post 'login' => :create
@@ -58,7 +47,6 @@ resources :musics
     get 'register' => :new
     post 'profile' => :show
     get 'search' => :index
-    # get 'search' => :search
     get 'contact' => :contact
   end
 
@@ -72,7 +60,6 @@ resources :musics
   get 'users/:id',        to: 'users#show',         as: :homepage
   get 'users/notification/:id',       to: 'users#notification',       as: :notification
   get 'users/newfriend/:id',      to: 'users#newfriend',        as: :newfriend
-  # get 'users/notification/viewcomm/:id' => 'musics#view_comm'
   get 'unreadcomments/view_comment/:id',    to: 'unreadcomments#view_comment',         as: :viewcomm
   get 'unreadlikes/view_like/:id',    to: 'unreadlikes#view_like',         as: :viewlike
 
