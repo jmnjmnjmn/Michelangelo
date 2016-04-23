@@ -7,7 +7,7 @@
 /.bundle
 /config/aws.yml
 # Ignore the default SQLite database.
-
+/*.pem
 # Ignore all logfiles and tempfiles.
 /log/*
 !/log/.keep
